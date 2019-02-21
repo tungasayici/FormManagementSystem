@@ -1,0 +1,62 @@
+﻿@model IEnumerable<LenaSoftFormManagement.Models.Form>
+
+@{
+    ViewBag.Title = "Form";
+}
+
+<h2>Forms</h2>
+
+<p>
+    @Html.ActionLink("Create Form", "Create")
+</p>
+
+@using (Html.BeginForm("Index","Form",FormMethod.Get))
+{
+    @Html.TextBox("searching")<input type="submit" value="Search" />
+
+}
+<table class="table">
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3" style="color:red">
+                    No Match Any Document
+                </td>
+            </tr>
+        }
+    </tbody>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FormName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FormName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.FormID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.FormID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.FormID })
+                    </td>
+                </tr>
+            
+            }
+</table>
